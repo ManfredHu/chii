@@ -78,7 +78,7 @@
             <div class="url">{{url}}</div>
           </div>
           <div class="actions">
-            <a class="action" onclick="inspect('{{id}}')">inspect</a>
+            <a class="action" onclick="inspect('{{id}}')">inspect client: {{id}}</a>
           </div>
         </div>
       </div>
@@ -97,14 +97,21 @@
   <script>
     function inspect(id) {
       const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-      const url = location.protocol + `//{{domain}}/front_end/chii_app.html?${protocol}={{domain}}/client/${_.randomId(6)}?target=${id}`;
+      const host = location.host
+      const randomIdStr = _.randomId(6)
+      console.log(`randomIdStr`, randomIdStr)
+      const url = location.protocol + `//${host}/front_end/devtools_app.html?${protocol}={{domain}}/client/${randomIdStr}?target=${id}`;
+      console.log(`open link`, url)
       window.open(url, '_blank');
     }
 
     const start = Date.now();
     setInterval(() => {
       fetch('/timestamp').then(res => res.text()).then(timestamp => {
-        if (timestamp > start) location.reload();
+        if (timestamp > start) {
+          console.log(`时间戳变化，新的时间戳 ${timestamp} diff ${start},页面刷新`)
+          location.reload();
+        }
       }, () => {});
     }, 2000);
   </script>

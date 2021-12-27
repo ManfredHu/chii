@@ -65,24 +65,29 @@ if (!id) {
   sessionStore.setItem('chii-id', id);
 }
 
-const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+let protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
 
-const ws = new Socket(
-  `${protocol}//${ChiiServerUrl}/target/${id}?${query.stringify({
-    url: location.href,
-    title: (window as any).ChiiTitle || document.title,
-    favicon: getFavicon(),
-  })}`
-);
+protocol = 'ws:';
+ChiiServerUrl = '127.0.0.1:8080';
+
+const opt = `${protocol}//${ChiiServerUrl}/target/${id}?${query.stringify({
+  url: location.href,
+  title: (window as any).ChiiTitle || document.title,
+  favicon: getFavicon(),
+})}`;
+console.log(`ws链接建立，参数为${opt}`);
+const ws = new Socket(opt);
 
 ws.on('open', () => {
   isInit = true;
   ws.on('message', event => {
+    console.log(`client on messgae`, event);
     chobitsu.sendRawMessage(event.data);
   });
 });
 
 chobitsu.setOnMessage((message: string) => {
   if (!isInit) return;
+  console.log(`client send messgae`, message);
   ws.send(message);
 });

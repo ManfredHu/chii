@@ -7,6 +7,7 @@
     "chii": "./bin/chii.js"
   },
   "scripts": {
+    "init": "sh scripts/init.sh",
     "ci": "npm run lint && npm run build",
     "format": "npm run format:front_end && npm run format:target && npm run format:server && prettier *.{js,json} scripts/*.js bin/*.js tests/*.{html,json,js,css} --write",
     "format:front_end": "lsla prettier 'front_end/**/*.{html,js,json}' --write",
