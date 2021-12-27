@@ -13,7 +13,7 @@ cd ../ && python3 scripts/apply_all_patches.py patches/config.json
 cd devtools/devtools-frontend
 gn gen out/Default 
 autoninja -C out/Default # compile devtools
-cp -R out/Default/gen/front_end ../../public/front_end # copy files
+cp -R out/Default/gen/front_end ../../public # copy files
 
 # gen ./target/index.js by devlopment
 # npm run dev:target
