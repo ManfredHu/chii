@@ -5,16 +5,20 @@ npm i
 # npm run init:front_end
 cd devtools 
 rm -rf devtools-frontend
-gclient sync --with_branch_heads --verbose 
+gclient sync --with_branch_heads --verbose
 cd ../ && python3 scripts/apply_all_patches.py patches/config.json
 
 # move front_end dir to public, make sure ../server/middle/router.js to route request
 # npm run dev:front_end
 cd devtools/devtools-frontend
-gn gen out/Default 
+gn gen out/Default
 autoninja -C out/Default # compile devtools
-cp -R out/Default/gen/front_end ../../public # copy files
+
+cd ../../
+cp -R devtools/devtools-frontend/out/Default/gen/front_end ./public # copy files
 
 # gen ./target/index.js by devlopment
 # npm run dev:target
-cd ../../ webpack --mode=development -w
+npx webpack --mode=development -w
+
+exit 0
