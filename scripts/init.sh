@@ -3,10 +3,13 @@ npm i
 
 # fethc devtools with init
 # npm run init:front_end
+
 cd devtools 
 rm -rf devtools-frontend
 gclient sync --with_branch_heads --verbose
-cd ../ && python3 scripts/apply_all_patches.py patches/config.json
+
+cd ../
+python3 scripts/apply_all_patches.py patches/config.json
 
 # move front_end dir to public, make sure ../server/middle/router.js to route request
 # npm run dev:front_end
@@ -19,6 +22,7 @@ cp -R devtools/devtools-frontend/out/Default/gen/front_end ./public # copy files
 
 # gen ./target/index.js by devlopment
 # npm run dev:target
-npx webpack --mode=development -w
+npx webpack --mode=development
 
+echo $PWD
 exit 0
