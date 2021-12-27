@@ -17,4 +17,4 @@ lsla shx cp -R out/Default/gen/front_end ../../public # copy files
 
 # gen ./target/index.js by devlopment
 # npm run dev:target
-webpack --mode=development -w
+cd ../../ webpack --mode=development -w
