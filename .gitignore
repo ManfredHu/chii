@@ -4,3 +4,4 @@ public
 devtools/.cipd
 package-lock.json
 scripts/lib/__pycache__
+devtools/devtools-frontend/
