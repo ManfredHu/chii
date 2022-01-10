@@ -75,7 +75,7 @@ const opt = `${protocol}//${ChiiServerUrl}/target/${id}?${query.stringify({
   title: (window as any).ChiiTitle || document.title,
   favicon: getFavicon(),
 })}`;
-console.log(`ws链接建立，参数为${opt}`);
+console.log(`ws链接建立，参数为${window.decodeURIComponent(opt)}`);
 const ws = new Socket(opt);
 
 ws.on('open', () => {

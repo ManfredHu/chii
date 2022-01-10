@@ -29,7 +29,7 @@ module.exports = class ChannelManager extends Emitter {
     this.emit('target_changed');
   }
   createClient(id, ws, target) {
-    console.log('createClient(): id, ws, target', id, ws, target);
+    console.log('createClient(): id, ws, target', id, ws);
     target = this._targets[target];
     if (!target) {
       return ws.close();
